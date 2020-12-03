@@ -41,49 +41,55 @@
             <v-form>
             <v-row justify="center" align="baseline">
             <v-col cols="10">
-                <v-text-field
+                <v-textarea
                 v-model="tresc"
                 filled
+                auto-grow
+                rows="2"
                 label="Tresć zadania"
                 required
                 @input="$v.name.$touch()"
                 @blur="$v.name.$touch()"
-                ></v-text-field>
+                ></v-textarea>
+            </v-col>
+            <v-col cols="1">
+             <v-card 
+             outlined dark color="secondary">
+             POPRAWNA
+             </v-card>
             </v-col>
             </v-row>
 
-            <v-row justify="center" align="baseline">
-            <v-col cols="10">
-                <v-text-field
+ <!-- Kolejne treści odpowiedzi -->
+     <v-expand-transition>
+        <v-row justify="center">
+        <v-col cols="10">
+              <v-text-field v-show="show"
                 v-model="odpowiedz"
                 filled
                 label="Dodaj treść odpowiedzi"
-                requireds
+                required
                 ></v-text-field>
-            </v-col>
+        </v-col>
 
-            <v-col cols="1">
-                <validation-provider
-                    
+        <v-col cols="1">
+           <validation-provider v-show="show"
                     rules="required"
                     name="checkbox"
                 >
                     <v-checkbox
                     v-model="checkbox"
-                  
-                    value="1"
-                    label="Option"
                     type="checkbox"
                     required
                     ></v-checkbox>
         </validation-provider>
+        </v-col>
+        </v-row>
+        </v-expand-transition>
 
-            </v-col>
-            </v-row>
-      
-      <!-- Guzik do dodania kolejnych treści odpowiedzi -->
-     <v-row justify="center">
-       <v-col cols="11" sm="5">
+<!-- Guziki: dodaj odp i zatierdz test -->
+     <v-row justify="space-around" dense>
+       <v-col cols="10" sm="5">
                <v-card-actions>
                     <v-btn
                     dark
@@ -95,34 +101,20 @@
                 </v-card-actions>
        </v-col>
 
-        <v-col cols="11" sm='5'>
+        <v-col cols="10" sm='5'>
                 <v-card-actions>
                         <v-btn
+                        v-model="zatwierdz_zadanie"
                         dark
                         color="primary">
-                        Zatwierdz
+                        Zatwierdz zadanie
                         </v-btn>
                 </v-card-actions>
         </v-col>
      </v-row>
- 
-
-        <v-expand-transition>
-            <v-card v-show="show">
-              <v-text-field
-                v-model="odpowiedz"
-                label="Dodaj treść odpowiedzi"
-                required
-                ></v-text-field>
-            </v-card>
-           
-        </v-expand-transition>
-
-
-                </v-form>
-               
-               </v-card>
-             </v-dialog>
+     </v-form>               
+     </v-card>
+     </v-dialog>
      </v-expansion-panel>
 
 <!-- Wyświetl wszystkie zadania -->

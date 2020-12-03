@@ -6,14 +6,31 @@
             :key="przedmiot.id"
             cols="4"
           >
-            <Przedmiot :przedmiot='przedmiot'/>
+          <v-card
+          min-height="200"
+          >
+         <v-btn
+         v-on:click='toggleDetail'
+         block
+         cover
+         tile
+         elevation="0"
+         color="secondary">
+             {{przedmiot.nazwa}}
+        </v-btn>
+
+    <v-card-subtitle v-show='!detail'>
+        Opiekun przedmiotu: {{przedmiot.opiekun.user.username}}
+    </v-card-subtitle>
+          </v-card>
+ 
           </v-col>
         </v-row>
   </v-container>
 </template>
 
 <script>
-import Przedmiot from './Przedmiot';
+// import Przedmiot from './Przedmiot';
 
   export default {
     name: 'przedmioty',
@@ -21,12 +38,19 @@ import Przedmiot from './Przedmiot';
 
 
     components: {
-        'Przedmiot': Przedmiot,
+        // 'Przedmiot': Przedmiot,
 
     },
 
 
     data: () => ({
+      detail: false,
     }),
+
+    methods: {
+    toggleDetail: function () {
+        this.detail = !this.detail
+     }
+  }
   }
 </script>

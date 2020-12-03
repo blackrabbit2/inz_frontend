@@ -13,7 +13,7 @@
         </v-btn>
 
     <v-card-subtitle v-show='!detail'>
-        {{przedmiot.opiekun.username}}
+        {{przedmiot.opiekun.user.username}}
     </v-card-subtitle>
 
     <v-expand-x-transition>

@@ -16,7 +16,8 @@
       <Glowna_prowadzacy
       v-if="user.prowadzacy"/>
       <Przedmioty_student
-      v-else-if="user.student"/>
+      v-else-if="user.student"
+      :przedmioty='przedmioty'/>
       <Przedmioty
       v-else
       :przedmioty='przedmioty'/>
