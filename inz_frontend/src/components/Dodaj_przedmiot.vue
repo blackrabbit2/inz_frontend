@@ -201,15 +201,21 @@ export default {
                 first_name: this.imie,
                 last_name: this.nazwisko,
                 username: this.username,
-                // password: this.haslo,
+                password: this.haslo,
             })
             .then( response =>{
                 this.$api
                  .post('prowadzacy/',
                 {
-                    user: response.id,
+                    user: response.data.id,
                     tytul_naukowy: this.tytul_naukowy,
-                })
+                }),
+                this.username = null,
+                this.haslo = null,
+                this.imie = null,
+                this.nazwisko = null,
+                this.tytul_naukowy = null,  
+              alert("Dodano nowego prowadzącego")
             }
             )
         }

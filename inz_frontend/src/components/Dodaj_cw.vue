@@ -117,15 +117,5 @@ export default {
         })
         },
     }
-    
-
-    // mounted: function () {
-    //     this.$api
-    //     .get('.grupy/')
-    //     .then(response => {
-     
-    //             }
-    //         )
-    //     },
 }
 </script>
