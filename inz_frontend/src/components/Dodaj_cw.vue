@@ -78,7 +78,7 @@
                     type="submit"
                     @click="zapisz_cwiczenie"
                 >
-                    Save
+                    Zapisz
                 </v-btn>
             </v-card-actions>
         
@@ -88,7 +88,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'dodaj_cw',
     props: ['przedmiot'],

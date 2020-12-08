@@ -171,16 +171,37 @@
                         </v-text-field>
                         
                         </v-list-item-title>
-                        <v-list-item-group subGroup="true" color="primary"> 
+
+                         
+
+                        <v-list-item-group subGroup="true" color="primary" v-if='zadanie.poprawna'>
+                           <v-radio-group v-model='zadanie.poprawna.id' required :key='zadanie.id'>
+                            <v-row> 
                             <v-list-item v-for="odpowiedz in zadanie.odpowiedzi" :key="odpowiedz.id">
+
+                                <v-col cols='9'>
                                 <v-text-field 
                                 @blur="save_odp(odpowiedz)"
                                 :value='odpowiedz.tresc'
                                 :readonly='!zadanie.write'
                                 v-model='odpowiedz.tresc'>
                                 </v-text-field>
+                                </v-col>
+                                
+                                <v-col cols="1">
+                                    <v-radio
+                                    :key='odpowiedz.id'
+                                    :value="odpowiedz.id"
+                                    :readonly='!zadanie.write'
+                                    @change="save_poprawna(odpowiedz.id, zadanie.id)"
+                                    ></v-radio>
+                                </v-col>
+
                             </v-list-item>
+                        </v-row>
+                         </v-radio-group>
                         </v-list-item-group>
+
                         </v-list-item-group>
                     </v-col>
                     </v-list>
@@ -216,7 +237,16 @@ export default {
         tresc: null,
         poprawna: null,
         pole_odp: null,
-        zadania: null,
+        zadania: [
+            {
+                id: 12,
+                tresc: null,
+                poprawna: {
+                    id: 12,
+                    tresc: null
+                }
+            }
+        ],
         
     }),
 
@@ -315,6 +345,14 @@ export default {
             {
                 tresc: odpowiedz.tresc
             })
+        },
+        save_poprawna: function(poprawna_id, zadanie_id){
+            this.$api
+            .put('quiz/zadania/'+zadanie_id+'/wybierz_poprawna/',
+                            {
+                                odpowiedz: poprawna_id
+                            }
+                )
         },
         }
     }

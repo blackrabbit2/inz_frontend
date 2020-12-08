@@ -15,7 +15,7 @@
                 sm="1"
             >
                 <div class="text-center">
-                  <Dodaj_grupe :przedmiot="przedmiot"/> 
+                  <Dodaj_grupe @grupaRefresh='init' :przedmiot="przedmiot"/> 
                 </div>
             </v-col>
              <v-col
@@ -112,8 +112,9 @@ export default {
         dialog: false,
     }),
 
-    mounted: function () {
-       this.$api
+    methods:{
+        init(){
+          this.$api
           .get('grupy/?przedmiot='+this.przedmiot.id)
           .then(response => {
               this.grupy = response.data
@@ -123,6 +124,11 @@ export default {
         .then(response => {
             this.cwiczenia = response.data
         })
+        }
+    },
+    
+    mounted: function () {
+        this.init();
 
     },    
 }

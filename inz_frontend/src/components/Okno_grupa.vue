@@ -36,6 +36,18 @@
                 <v-toolbar-title>
                 {{grupa.kod_grupy+" "+grupa.dzien_tygodnia + ", godzina: " + grupa.godzina}}
                 </v-toolbar-title>
+                <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                            <v-btn
+                            dark
+                            text
+                            @click="usun(grupa)"
+                            >
+                            <v-icon>fas fa-trash</v-icon>
+                            Usuń grupę
+                            </v-btn>
+                    </v-toolbar-items>
+
                 </v-toolbar>
 
                  <v-expansion-panels>
@@ -71,6 +83,22 @@ export default {
      data: () =>({
         dialog: [],
     }),
+
+    methods: {
+        usun: function(grupa){
+            if(confirm("Na pewno usunąć grupę "+grupa.kod_grupy)){
+                this.$api
+                .delete('/grupy/'+ grupa.id)
+                .then(() => {
+                    grupa.id = 0
+                    var removeIndex = this.grupy.map(item => item.id).indexOf(grupa.id)
+                    ~removeIndex && this.grupy.splice(removeIndex, 1)
+                    this.$forceUpdate()
+                })
+            }
+
+        }
+    },
 
 }
 </script>

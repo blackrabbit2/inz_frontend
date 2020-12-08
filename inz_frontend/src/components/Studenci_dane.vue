@@ -141,7 +141,6 @@ export default {
     },
 
      mounted: function () {
-       console.log(this.grupa.id)
        this.$api
           .get('studenci/?grupa='+this.grupa.id)
           .then(response => {

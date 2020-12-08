@@ -131,7 +131,11 @@ export default {
                 godzina: this.godzina,
             }
             )
-            .then(this.dialog = false)
+            .then(() => {
+              this.dialog = false
+              this.$emit('grupaRefresh')
+            }
+          )
         },
     },
 
