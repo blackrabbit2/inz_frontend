@@ -15,7 +15,7 @@
                 sm="1"
             >
                 <div class="text-center">
-                  <Dodaj_grupe @grupaRefresh='init' :przedmiot="przedmiot"/> 
+                  <Dodaj_grupe @grupaRefresh='init_grupa' :przedmiot="przedmiot"/> 
                 </div>
             </v-col>
              <v-col
@@ -51,7 +51,7 @@
                 sm="1"
             >
                 <div class="text-center">
-                  <Dodaj_cw :przedmiot="przedmiot"/> 
+                  <Dodaj_cw @cwiczenieRefresh='init_cwiczenie' :przedmiot="przedmiot"/> 
                 </div>
             </v-col>
              <v-col
@@ -74,7 +74,15 @@
             :key="cwiczenie.id"
             >
                 <v-expansion-panel-header
-                v-text='cwiczenie.nazwa_cwiczenia'>
+                >
+                <v-row justify='center'>
+                <v-col cols="9">
+                 {{cwiczenie.nazwa_cwiczenia}}
+                </v-col>
+                <v-col cols="3">
+                    <Usun_cw :cwiczenie="cwiczenie"/>
+                </v-col>
+                </v-row>
                 </v-expansion-panel-header>
                 
                 <v-expansion-panel-content>
@@ -94,6 +102,7 @@ import Okno_grupa from './Okno_grupa';
 import Dodaj_grupe from './Dodaj_grupe';
 import Dodaj_cw from './Dodaj_cw';
 import Quiz_prowadzacy from './Quiz_prowadzacy';
+import Usun_cw from './Usun_cw'
 
 export default {
     name: 'grupy',
@@ -104,6 +113,7 @@ export default {
         'Dodaj_grupe': Dodaj_grupe,
         'Dodaj_cw': Dodaj_cw,
         'Quiz_prowadzacy': Quiz_prowadzacy,
+        'Usun_cw': Usun_cw,
     },
 
     data: () =>({
@@ -113,22 +123,25 @@ export default {
     }),
 
     methods:{
-        init(){
+        init_grupa(){
           this.$api
           .get('grupy/?przedmiot='+this.przedmiot.id)
           .then(response => {
               this.grupy = response.data
           })
-        this.$api
-        .get('cwiczenia/?przedmiot='+ this.przedmiot.id)
-        .then(response => {
-            this.cwiczenia = response.data
+        },
+        init_cwiczenie(){
+          this.$api
+          .get('cwiczenia/?przedmiot='+ this.przedmiot.id)
+          .then(response => {
+             this.cwiczenia = response.data
         })
         }
     },
     
     mounted: function () {
-        this.init();
+        this.init_grupa();
+        this.init_cwiczenie();
 
     },    
 }

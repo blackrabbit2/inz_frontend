@@ -129,8 +129,7 @@ export default {
                 przedmiot: this.przedmiot.id,
                 dzien_tygodnia: this.dzien_tygodnia,
                 godzina: this.godzina,
-            }
-            )
+            })
             .then(() => {
               this.dialog = false
               this.$emit('grupaRefresh')

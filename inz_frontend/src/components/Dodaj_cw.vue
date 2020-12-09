@@ -1,6 +1,5 @@
 <template>
-    <v-row justify="center"
-    :key='cwiczenia_view'>
+    <v-row justify="center">
         <v-dialog
         v-model="dialog"
         persistent
@@ -93,7 +92,6 @@ export default {
     props: ['przedmiot'],
 
     data: () => ({
-        cwiczenia_view: 0,
         dialog: false,
         temat: [],
         ilosc_zadan: [],
@@ -110,7 +108,10 @@ export default {
                 przedmiot: this.przedmiot.id,
                 instrukcje: this.instrukcja,                
             })
-            .then(this.dialog = false)
+            .then( () => {
+                this.dialog = false
+                this.$emit('cwiczenieRefresh')
+            })
         .catch(function(error){
         alert(error)
         })

@@ -290,7 +290,6 @@ export default {
             )
             .then(response =>{
                 this.odpowiedzi.map(odpowiedz => {
-                    console.log(response)
                     this.$api
                     .put('quiz/zadania/'+response.data.id+'/dodaj_odp/',
                     {
