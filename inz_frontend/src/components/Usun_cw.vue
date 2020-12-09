@@ -19,13 +19,10 @@ export default {
         usun: function(cwiczenie){
             if(confirm("Na pewno usunąć ćwiczenie "+cwiczenie.nazwa_cwiczenia)){
                 this.$api
-                console.log(cwiczenie.id)
                 .delete('/cwiczenia/'+ cwiczenie.id)
                 .then(() => {
                     cwiczenie.id = 0
-                    var removeIndex = this.cwiczenia.map(item => item.id).indexOf(cwiczenie.id)
-                    ~removeIndex && this.cwiczenia.splice(removeIndex, 1)
-                    this.$forceUpdate()  
+                    this.$emit('cwiczenieRefresh'); 
                 })
             }
         },

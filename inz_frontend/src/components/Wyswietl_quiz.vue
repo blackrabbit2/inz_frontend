@@ -43,7 +43,7 @@
                         </v-switch>
                         </v-col>
                         <v-col cols="3">
-                            <Usun_zadanie :zadanie='zadanie'/>
+                            <Usun_zadanie @zadanieRefresh="pobierz_zadania" :zadanie='zadanie'/>
                         </v-col>
                         </v-row>
 
@@ -57,8 +57,6 @@
                         </v-text-field>
                         
                         </v-list-item-title>                     
-                            {{zadanie.odpowiedzi}}
-
                         <v-list-item-group subGroup="true" color="primary" v-if='zadanie.poprawna'>
                            <v-radio-group v-model='zadanie.poprawna.id' required :key='zadanie.id'>
                             <v-row> 
@@ -100,7 +98,7 @@ import Usun_zadanie from './Usun_zadanie.vue';
 
 export default {
     name: 'wyswietl_quiz',
-    props: ['cwiczenie',],
+    props: ['cwiczenie','bus'],
 
     components:{
         'Usun_zadanie': Usun_zadanie,
@@ -123,6 +121,7 @@ export default {
 
     mounted: function() {
         this.pobierz_zadania()
+        this.bus.$on('zadanieRefresh', this.pobierz_zadania)
     },
 
     methods: {
@@ -131,7 +130,6 @@ export default {
             .get('quiz/zadania/?test='+this.cwiczenie.id)
             .then(response => {
                 this.zadania = response.data
-                console.log(response.data)
             })
             this.lista_zadan+=1
         },

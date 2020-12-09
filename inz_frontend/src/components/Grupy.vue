@@ -80,7 +80,7 @@
                  {{cwiczenie.nazwa_cwiczenia}}
                 </v-col>
                 <v-col cols="3">
-                    <Usun_cw :cwiczenie='cwiczenie'/>
+                    <Usun_cw @cwiczenieRefresh="init_cwiczenie" :cwiczenie='cwiczenie'/>
                 </v-col>
                 </v-row>
                 </v-expansion-panel-header>
@@ -89,11 +89,10 @@
                 <v-expansion-panel-content>
                 <v-row justify="space-around">
                 <v-col cols="5">
-                     <Quiz_prowadzacy :cwiczenie="cwiczenie" :key="cwiczenie.id"/>    
+                     <Quiz_prowadzacy @zadanieRefresh="init_zadania" :cwiczenie="cwiczenie" :key="cwiczenie.id"/>    
                 </v-col>
                 <v-col cols="5">
-
-                     <Wyswietl_quiz :cwiczenie="cwiczenie" :key="cwiczenie.id"/>
+                     <Wyswietl_quiz ref='wyswietl_quiz' :cwiczenie="cwiczenie" :bus='bus' :key="cwiczenie.id"/>
                 </v-col>
                 </v-row>
                 </v-expansion-panel-content>
@@ -112,7 +111,8 @@ import Dodaj_grupe from './Dodaj_grupe';
 import Dodaj_cw from './Dodaj_cw';
 import Quiz_prowadzacy from './Quiz_prowadzacy';
 import Wyswietl_quiz from './Wyswietl_quiz';
-import Usun_cw from './Usun_cw'
+import Usun_cw from './Usun_cw';
+import Vue from 'vue';
 
 export default {
     name: 'grupy',
@@ -131,6 +131,7 @@ export default {
         grupy: [],
         cwiczenia: [],
         dialog: false,
+        bus: new Vue(),
     }),
 
     methods:{
@@ -148,6 +149,9 @@ export default {
              this.cwiczenia = response.data
         })
         },
+        init_zadania(){
+            this.bus.$emit('zadanieRefresh')
+        }
     },
     
     mounted: function () {

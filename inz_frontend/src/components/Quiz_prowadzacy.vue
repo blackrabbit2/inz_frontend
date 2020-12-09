@@ -166,7 +166,6 @@ export default {
         },
 
         zatwierdz_zadanie: function(){
-            console.log(this.poprawna)
              this.$api 
             .post('quiz/zadania/',
             {
@@ -189,6 +188,7 @@ export default {
                                 odpowiedz: response_zadanie.data.id
                             }
                             )
+                            .then(this.$emit('zadanieRefresh'))
                         }
                     })
                 })
