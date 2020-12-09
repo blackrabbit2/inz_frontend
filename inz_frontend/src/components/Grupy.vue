@@ -80,15 +80,24 @@
                  {{cwiczenie.nazwa_cwiczenia}}
                 </v-col>
                 <v-col cols="3">
-                    <Usun_cw :cwiczenie="cwiczenie"/>
+                    <Usun_cw :cwiczenie='cwiczenie'/>
                 </v-col>
                 </v-row>
                 </v-expansion-panel-header>
                 
+        <!-- Quiz ----------------------->
                 <v-expansion-panel-content>
-                <!-- Quiz ----------------------->
-                     <Quiz_prowadzacy :cwiczenie="cwiczenie"/>    
+                <v-row justify="space-around">
+                <v-col cols="5">
+                     <Quiz_prowadzacy :cwiczenie="cwiczenie" :key="cwiczenie.id"/>    
+                </v-col>
+                <v-col cols="5">
+
+                     <Wyswietl_quiz :cwiczenie="cwiczenie" :key="cwiczenie.id"/>
+                </v-col>
+                </v-row>
                 </v-expansion-panel-content>
+               
             </v-expansion-panel>
           </v-expansion-panels>
         </v-expansion-panel-content>
@@ -102,6 +111,7 @@ import Okno_grupa from './Okno_grupa';
 import Dodaj_grupe from './Dodaj_grupe';
 import Dodaj_cw from './Dodaj_cw';
 import Quiz_prowadzacy from './Quiz_prowadzacy';
+import Wyswietl_quiz from './Wyswietl_quiz';
 import Usun_cw from './Usun_cw'
 
 export default {
@@ -113,6 +123,7 @@ export default {
         'Dodaj_grupe': Dodaj_grupe,
         'Dodaj_cw': Dodaj_cw,
         'Quiz_prowadzacy': Quiz_prowadzacy,
+        'Wyswietl_quiz': Wyswietl_quiz,
         'Usun_cw': Usun_cw,
     },
 
@@ -136,13 +147,12 @@ export default {
           .then(response => {
              this.cwiczenia = response.data
         })
-        }
+        },
     },
     
     mounted: function () {
         this.init_grupa();
         this.init_cwiczenie();
-
     },    
 }
 </script>

@@ -11,18 +11,8 @@
         class="flex white--text text-center "
       >
 
-        <v-card-text>
-          <v-btn
-            max-height="24px"
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-3 white--text"
-            icon
-          >
-            <v-icon size="24px">
-              {{ icon }}
-            </v-icon>
-          </v-btn>
+        <v-card-text class="white--text">
+        Politechnika Wrocławska Wydział Elektryczny
         </v-card-text>
         <v-card-text class="white--text pt-0">
             Projekt wykonano w ramach pracy inżynierskiej.

@@ -7,7 +7,6 @@
             @click="usun(cwiczenie)"
             >
             <v-icon>fas fa-trash</v-icon>
-            Usuń ćwiczenie
             </v-btn>   
 </template>
 
@@ -20,15 +19,16 @@ export default {
         usun: function(cwiczenie){
             if(confirm("Na pewno usunąć ćwiczenie "+cwiczenie.nazwa_cwiczenia)){
                 this.$api
-                .delete('/cwiczenie/'+cwiczenie.id)
+                console.log(cwiczenie.id)
+                .delete('/cwiczenia/'+ cwiczenie.id)
                 .then(() => {
                     cwiczenie.id = 0
                     var removeIndex = this.cwiczenia.map(item => item.id).indexOf(cwiczenie.id)
                     ~removeIndex && this.cwiczenia.splice(removeIndex, 1)
-                    this.$forceUpdate()
+                    this.$forceUpdate()  
                 })
-        }
-    }
+            }
+        },
     }
 }
 </script>
