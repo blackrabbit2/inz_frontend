@@ -111,6 +111,7 @@ export default {
                 .then((response) => {
                     this.$api.defaults.headers.common["Authorization"] =
                         "Token " + response.data.token;
+                    this.$cookie.set('Token', response.data.token, 1)
                     this.user.id = response.data.user;
                     this.user.prowadzacy = true;
                     this.logowanie_prowadzacy = false;
@@ -127,20 +128,19 @@ export default {
                 .then((response) => {
                     this.$api.defaults.headers.common["Authorization"] =
                         "Token " + response.data.token;
-                    this.$cookie.set('Token', response.data.token, 1)    
+                    this.$cookie.set('Token', response.data.token, 1)
                     this.$api
                         .get('users/' + response.data.user + '/')
                         .then((response) => {
                             this.user = response.data
                             if (!this.user.first_name) {
                                 this.uzupelnienie_danych = true;
-                            }
-                            else{
-                              this.$api
-                              .get('studenci/')
-                              .then((response) => {
-                                this.$emit('studentComplete', response.data[0])
-                              })
+                            } else {
+                                this.$api
+                                    .get('studenci/')
+                                    .then((response) => {
+                                        this.$emit('studentComplete', response.data[0])
+                                    })
                             }
                             this.user.student = true;
                             this.logowanie_student = false;
