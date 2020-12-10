@@ -130,20 +130,30 @@
                   </v-form>
                   </v-card>
         </v-dialog>
+        
       </v-list-item-title>
     </v-list-item>
   </v-list>
+                    <Uzupelnienie_danych :user="user"
+                    v-model='uzupelnienie_danych'/>
+                    
   </v-menu>
 </template>
 
 
 
 <script>
+import Uzupelnienie_danych from './Uzupelnienie_danych';
+
   export default {
     name: 'logowanie',
     props: ['user'],
 
+  components:{
+    'Uzupelnienie_danych': Uzupelnienie_danych,
+  },
     data: () => ({
+      uzupelnienie_danych: false,
       logowanie_student: false,
       logowanie_prowadzacy: false,
       haslo: null,
@@ -170,6 +180,11 @@
       .then(response => {
         this.$api.defaults.headers.common['Authorization']='Token '+response.data.token
         this.user.id = response.data.user
+        if(!this.user.first_name){
+          this.uzupelnienie_danych = true
+
+          console.log(this.uzupelnienie_danych);
+        }
         this.user.student = true
         this.logowanie_student = false
       }

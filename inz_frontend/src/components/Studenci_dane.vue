@@ -73,7 +73,6 @@
                   <v-btn
                       depressed
                       color="primary"
-                      type="submit"
                       @click='generuj_studentow'
                     >
                       Wygeneruj
@@ -123,7 +122,9 @@ export default {
 
       studenci: [],
     }),
-   
+    mounted: function () {
+          this.init_studenci()
+        },
     methods: {
       generuj_studentow: function(){
         this.$api
@@ -133,14 +134,12 @@ export default {
           liczba_grup_lab: this.liczba_grup_lab,
         }
         )
-        // .then(() => {
-        //   //  this.$forceUpdate()
-        // })
+        .then(() => {
+          this.init_studenci()
+        })
         
-      }
-    },
-
-     mounted: function () {
+      },
+      init_studenci: function(){
        this.$api
           .get('studenci/?grupa='+this.grupa.id)
           .then(response => {
@@ -157,6 +156,7 @@ export default {
               )
             })
           })
-        }
+      }
+    },
 }
 </script>

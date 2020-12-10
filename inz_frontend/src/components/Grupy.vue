@@ -31,7 +31,7 @@
         </v-expansion-panel-header>
      
         <v-expansion-panel-content>
-            <Okno_grupa :grupy="grupy"/>
+                <Okno_grupa @grupaRefresh='init_grupa' :grupy="grupy"/>
         </v-expansion-panel-content>
       </v-expansion-panel>
      </v-expansion-panels>
@@ -75,11 +75,11 @@
             >
                 <v-expansion-panel-header
                 >
-                <v-row justify='center'>
-                <v-col cols="9">
+                <v-row justify='space-between'>
+                <v-col cols="9" sm="5">
                  {{cwiczenie.nazwa_cwiczenia}}
                 </v-col>
-                <v-col cols="3">
+                <v-col cols="3" sm="1">
                     <Usun_cw @cwiczenieRefresh="init_cwiczenie" :cwiczenie='cwiczenie'/>
                 </v-col>
                 </v-row>
@@ -87,12 +87,15 @@
                 
         <!-- Quiz ----------------------->
                 <v-expansion-panel-content>
-                <v-row justify="space-around">
-                <v-col cols="5">
+                <v-row justify="space-between">
+                <v-col cols="4" sm="2">
                      <Quiz_prowadzacy @zadanieRefresh="init_zadania" :cwiczenie="cwiczenie" :key="cwiczenie.id"/>    
                 </v-col>
-                <v-col cols="5">
+                <v-col cols="4" sm="2">
                      <Wyswietl_quiz ref='wyswietl_quiz' :cwiczenie="cwiczenie" :bus='bus' :key="cwiczenie.id"/>
+                </v-col>
+                <v-col cols="4" sm=2>
+                    <Protokol_prowadzacy :cwiczenie="cwiczenie" :key="cwiczenie.id"/>
                 </v-col>
                 </v-row>
                 </v-expansion-panel-content>
@@ -112,6 +115,8 @@ import Dodaj_cw from './Dodaj_cw';
 import Quiz_prowadzacy from './Quiz_prowadzacy';
 import Wyswietl_quiz from './Wyswietl_quiz';
 import Usun_cw from './Usun_cw';
+// import Usun_grupe from './Usun_grupe';
+import Protokol_prowadzacy from './Protokol_prowadzacy';
 import Vue from 'vue';
 
 export default {
@@ -125,6 +130,8 @@ export default {
         'Quiz_prowadzacy': Quiz_prowadzacy,
         'Wyswietl_quiz': Wyswietl_quiz,
         'Usun_cw': Usun_cw,
+        // 'Usun_grupe': Usun_grupe,
+        'Protokol_prowadzacy': Protokol_prowadzacy,
     },
 
     data: () =>({
