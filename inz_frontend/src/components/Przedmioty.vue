@@ -1,56 +1,47 @@
 <template>
   <v-container>
-      <v-row>
-          <v-col
-            v-for="przedmiot in przedmioty"
-            :key="przedmiot.id"
-            cols="4"
+    <v-row>
+      <v-col v-for="przedmiot in przedmioty" :key="przedmiot.id" cols="4">
+        <v-card min-height="200">
+          <v-btn
+            v-on:click="toggleDetail"
+            block
+            cover
+            tile
+            elevation="0"
+            color="secondary"
           >
-          <v-card
-          min-height="200"
-          >
-         <v-btn
-         v-on:click='toggleDetail'
-         block
-         cover
-         tile
-         elevation="0"
-         color="secondary">
-             {{przedmiot.nazwa}}
-        </v-btn>
+            {{ przedmiot.nazwa }}
+          </v-btn>
 
-    <v-card-subtitle v-show='!detail'>
-        Opiekun przedmiotu: {{przedmiot.opiekun.user.username}}
-    </v-card-subtitle>
-          </v-card>
- 
-          </v-col>
-        </v-row>
+          <v-card-subtitle v-show="!detail">
+            Opiekun przedmiotu: {{ przedmiot.opiekun.user.username }}
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 // import Przedmiot from './Przedmiot';
 
-  export default {
-    name: 'przedmioty',
-    props: ['przedmioty'],
+export default {
+  name: "przedmioty",
+  props: ["przedmioty"],
 
+  components: {
+    // 'Przedmiot': Przedmiot,
+  },
 
-    components: {
-        // 'Przedmiot': Przedmiot,
+  data: () => ({
+    detail: false,
+  }),
 
-    },
-
-
-    data: () => ({
-      detail: false,
-    }),
-
-    methods: {
+  methods: {
     toggleDetail: function () {
-        this.detail = !this.detail
-     }
-  }
-  }
+      this.detail = !this.detail;
+    },
+  },
+};
 </script>
