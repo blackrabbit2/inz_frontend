@@ -12,7 +12,8 @@
                 </v-btn>
             </v-card-actions>
             <v-card-actions>
-                <v-dialog v-model="wyswietl" scrollable max-width="300px">
+                <!--Wyświetlanie i usuwanie prowadzących-->
+                <v-dialog v-model="wyswietl" scrollable max-width="400px">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn outlined rounded color="secondary" block v-bind="attrs" v-on="on" @click="wyswietl_prowadzacych">
                             Wyświetl
@@ -20,20 +21,33 @@
                     </template>
                     <v-card>
                         <v-card-title>Prowadzący</v-card-title>
-                        <v-divider></v-divider>
-                        <v-list-item v-for="prowadzacy in prowadzacy" :key="prowadzacy.id">
-                            <v-list-item-content>
-                                <v-list-item-title v-if="prowadzacy.user">{{
+                        <v-card-text style="height: 500px;">
+                            <v-divider></v-divider>
+                            <v-radio-group v-model="prowadzacy_usun" :key="prowadzacy.id" column>
+                                <v-row justify="start" no-gutters>
+                                    <v-list-item v-for="prowadzacy in prowadzacy" :key="prowadzacy.id">
+                                        <v-col>
+                                            <v-radio :key="prowadzacy.id" :value="prowadzacy.id">
+                                            </v-radio>
+                                        </v-col>
+                                        <v-col>
+                                            <v-list-item-content>
+                                                <v-list-item-title v-if="prowadzacy.user">{{
                     `${prowadzacy.tytul_naukowy} ${prowadzacy.user.first_name} ${prowadzacy.user.last_name}`
                   }}</v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
+                                            </v-list-item-content>
+                                        </v-col>
+                                    </v-list-item>
+                                </v-row>
+                            </v-radio-group>
+                        </v-card-text>
                         <v-divider></v-divider>
                         <v-card-actions>
                             <v-btn color="primary" text @click="wyswietl = false">
                                 Zamknij
                             </v-btn>
                         </v-card-actions>
+
                     </v-card>
                 </v-dialog>
             </v-card-actions>
@@ -144,6 +158,7 @@ export default {
         prowadzacy: [],
         nazwa_przedmiotu: "",
         wyswietl: false,
+        prowadzacy_usun: [],
     }),
 
     methods: {
@@ -180,6 +195,12 @@ export default {
                 this.prowadzacy = response.data;
             });
         },
+        // usun_prowadzacy: function(prowadzacy_id){
+        //     if(confirm("Na pewno ususnąć prowadzącego?")){
+        //         this.$api.delete("")
+        //     }
+
+        // }
     },
 
     mounted: function () {

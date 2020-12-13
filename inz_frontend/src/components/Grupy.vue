@@ -109,7 +109,6 @@ import Dodaj_cw from "./Dodaj_cw";
 import Quiz_prowadzacy from "./Quiz_prowadzacy";
 import Wyswietl_quiz from "./Wyswietl_quiz";
 import Usun_cw from "./Usun_cw";
-// import Usun_grupe from './Usun_grupe';
 import Protokol_prowadzacy from "./Protokol_prowadzacy";
 import Vue from "vue";
 
@@ -124,7 +123,6 @@ export default {
     Quiz_prowadzacy: Quiz_prowadzacy,
     Wyswietl_quiz: Wyswietl_quiz,
     Usun_cw: Usun_cw,
-    // 'Usun_grupe': Usun_grupe,
     Protokol_prowadzacy: Protokol_prowadzacy,
   },
 

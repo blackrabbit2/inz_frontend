@@ -1,7 +1,7 @@
 <template>
 <v-app>
     <v-app-bar app color="primary" dark>
-        <p>Interaktywne instrukcje laboratoryjne {{ user.first_name }}</p>
+        <v-toolbar-title>Interaktywne instrukcje laboratoryjne {{ user.first_name }}</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <Logowanie @studentComplete="odbierz_student" :user="user" />
@@ -9,7 +9,7 @@
 
     <v-main :key='user.id'>
         <Glowna_prowadzacy v-if="user.prowadzacy" />
-        <Przedmioty_student v-else-if="user.student" :przedmioty="przedmioty" />
+        <Przedmioty_student v-else-if="user.student" :student="student" :przedmioty="przedmioty" />
         <Przedmioty v-else :przedmioty="przedmioty" />
     </v-main>
 

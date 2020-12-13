@@ -55,6 +55,7 @@
                 v-model="zadanie.poprawna.id"
                 required
                 :key="zadanie.id"
+                column
               >
                 <v-row>
                   <v-list-item
